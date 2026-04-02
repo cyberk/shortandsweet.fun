@@ -1,0 +1,98 @@
+---
+interface Props {
+  date: string;
+  time: string;
+  venue: string;
+  location: string;
+  url?: string;
+}
+
+const { date, time, venue, location, url } = Astro.props;
+
+const formatted = new Date(date + 'T00:00:00').toLocaleDateString('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<div class="show-card">
+  <div class="show-card-date">
+    <span class="show-day">{formatted}</span>
+    <span class="show-time">{time}</span>
+  </div>
+  <div class="show-card-details">
+    <h3 class="show-venue">{venue}</h3>
+    <p class="show-location">{location}</p>
+    {url && <a href={url} target="_blank" rel="noopener noreferrer" class="show-link">Tickets & Info &rarr;</a>}
+  </div>
+</div>
+
+<style>
+  .show-card {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--color-accent);
+    border-left: 6px dashed var(--color-accent);
+    border-radius: 0 8px 8px 0;
+    padding: 1.25rem 1.5rem;
+    transform: rotate(-0.5deg);
+    background: white;
+    box-shadow: 3px 3px 0 var(--color-accent-yellow);
+    transition: transform 0.2s;
+  }
+
+  .show-card:hover {
+    transform: rotate(0deg) translateY(-2px);
+  }
+
+  .show-card-date {
+    font-family: var(--font-display);
+    margin-bottom: 0.5rem;
+  }
+
+  .show-day {
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    display: block;
+  }
+
+  .show-time {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    opacity: 0.7;
+  }
+
+  .show-venue {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .show-location {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-top: 0.15rem;
+  }
+
+  .show-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  @media (min-width: 768px) {
+    .show-card {
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .show-card-date {
+      margin-bottom: 0;
+      min-width: 200px;
+    }
+  }
+</style>
