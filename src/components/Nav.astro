@@ -1,0 +1,59 @@
+---
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#video', label: 'Video' },
+  { href: '#shows', label: 'Shows' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<nav class="nav">
+  <a href="#" class="nav-logo">Short & Sweet</a>
+  <ul class="nav-links">
+    {links.map(link => (
+      <li><a href={link.href}>{link.label}</a></li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-bg);
+    border-bottom: 2px solid var(--color-accent);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-accent-yellow);
+    text-decoration: none;
+  }
+</style>
