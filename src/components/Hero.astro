@@ -1,0 +1,99 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '../assets/images/short-and-sweet-improv.jpg';
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-image-wrapper">
+      <Image src={heroImage} alt="Andrew and Hadas — the Short & Sweet improv duo" width={500} class="hero-image" />
+    </div>
+    <div class="hero-text">
+      <h1 class="hero-title">Short <span class="amp">&</span> Sweet</h1>
+      <p class="hero-subtitle">Improv and Other Tangents</p>
+      <p class="hero-tagline">He's short. She's sweet. They tell stories with unexpected detours.</p>
+    </div>
+  </div>
+  <div class="sparkle sparkle-1" aria-hidden="true"></div>
+  <div class="sparkle sparkle-2" aria-hidden="true"></div>
+  <div class="sparkle sparkle-3" aria-hidden="true"></div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 4rem 1.5rem 3rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .hero-image-wrapper {
+    transform: rotate(-2deg);
+    box-shadow: 6px 6px 0 var(--color-accent-yellow), 8px 8px 20px rgba(0,0,0,0.1);
+    border: 4px solid white;
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 400px;
+  }
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    color: var(--color-text);
+  }
+
+  .amp {
+    color: var(--color-accent);
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--color-accent);
+    margin-top: 0.25rem;
+  }
+
+  .hero-tagline {
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    max-width: 500px;
+  }
+
+  /* Sparkle decorations */
+  .sparkle {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: var(--color-accent-yellow);
+    clip-path: polygon(50% 0%, 58% 38%, 100% 50%, 58% 62%, 50% 100%, 42% 62%, 0% 50%, 42% 38%);
+  }
+
+  .sparkle-1 { top: 10%; left: 8%; width: 20px; height: 20px; }
+  .sparkle-2 { top: 20%; right: 10%; width: 28px; height: 28px; }
+  .sparkle-3 { bottom: 15%; left: 15%; width: 16px; height: 16px; }
+
+  @media (min-width: 768px) {
+    .hero-content {
+      flex-direction: row;
+      text-align: left;
+    }
+    .hero-title {
+      font-size: 4.5rem;
+    }
+  }
+</style>
