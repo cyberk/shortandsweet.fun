@@ -1,6 +1,6 @@
 ---
 interface Props {
-  date: string;
+  date: string | Date;
   time: string;
   venue: string;
   location: string;
@@ -9,7 +9,8 @@ interface Props {
 
 const { date, time, venue, location, url } = Astro.props;
 
-const formatted = new Date(date + 'T00:00:00').toLocaleDateString('en-US', {
+const dateObj = date instanceof Date ? date : new Date(date + 'T00:00:00');
+const formatted = dateObj.toLocaleDateString('en-US', {
   weekday: 'long',
   year: 'numeric',
   month: 'long',

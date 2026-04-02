@@ -3,14 +3,25 @@ import yaml from 'js-yaml';
 import fs from 'node:fs';
 import ShowCard from './ShowCard.astro';
 
-const yamlPath = new URL('../data/shows.yaml', import.meta.url);
+import path from 'node:path';
+
+const yamlPath = path.join(process.cwd(), 'src/data/shows.yaml');
 const raw = fs.readFileSync(yamlPath, 'utf-8');
 const allShows = yaml.load(raw) as Array<{ date: string; time: string; venue: string; location: string; url?: string }>;
 
-const today = new Date().toISOString().split('T')[0];
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
 const upcomingShows = allShows
-  .filter(show => show.date >= today)
-  .sort((a, b) => a.date.localeCompare(b.date));
+  .filter(show => {
+    const showDate = show.date instanceof Date ? show.date : new Date(show.date + 'T00:00:00');
+    return showDate >= today;
+  })
+  .sort((a, b) => {
+    const dateA = a.date instanceof Date ? a.date : new Date(a.date + 'T00:00:00');
+    const dateB = b.date instanceof Date ? b.date : new Date(b.date + 'T00:00:00');
+    return dateA.getTime() - dateB.getTime();
+  });
 ---
 
 <section id="shows" class="shows-section">
